@@ -6,3 +6,4 @@ sites/*/files
 sites/*/private
 custom/
 sites/all/modules/custom/
+/nbproject/private/
