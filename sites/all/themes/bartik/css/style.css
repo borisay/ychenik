@@ -1682,7 +1682,6 @@ color: #999999;
 #site-name {
   font-size: 2.3em;
   font-style: italic;
-  background-image: sites/deafault/files/sitename.jpg
 }
 #site-name a {
 color: #003366;
@@ -1976,7 +1975,7 @@ table .mini-day-on a {
   z-index: 3;
 }
 .contextual-links-region {
-  z-index: 2; //for views edit
+  z-index: 2; /*for views edit*/
 }
 #block-views-calendar-block-1 {
   width: 90%;
@@ -2020,5 +2019,5 @@ z-index: 1;
   position: relative;
 }
 .view-empty {
-  display: none; // hide suggestion to filter anything... from new release of views
+  display: none; /* hide suggestion to filter anything... from new release of views*/
 } 
