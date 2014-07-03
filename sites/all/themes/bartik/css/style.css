@@ -1664,41 +1664,40 @@ div.admin-panel .description {
 .views-exposed-widgets .form-item input {
 	/* position: relative;
  top: -26px;*/
-	color: #bf5d07;
+  color: #bf5d07;
   font-style: italic;
-	width: 321px;
+  width: 321px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
-margin-top: 0px;
+  margin-top: 0px;
 }
 .views-exposed-form label {
-position: absolute;
-top: 11px;
-z-index: 1;
-padding-left: 10px;
-color: #999999;
+  position: absolute;
+  top: 11px;
+  z-index: 1;
+  padding-left: 10px;
+  color: #999999;
 }
 
 #site-name {
   font-size: 2.3em;
   font-style: italic;
-  background-image: sites/deafault/files/sitename.jpg
 }
 #site-name a {
-color: #003366;
-font-weight: bold;
+  color: #003366;
+  font-weight: bold;
 }
 .node-parents 
 .field,
 .node-business 
 .field {
-background-color: #FFF7E7;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-margin: 0 0 5px 0;
-padding: 5px;
-font-weight: normal;
-font-size: 1.1em !important;
-color: #333333;
+  background-color: #FFF7E7;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0 0 5px 0;
+  padding: 5px;
+  font-weight: normal;
+  font-size: 1.1em !important;
+  color: #333333;
 }
 .node-parents .field-label,
 .node-business .field-label{
@@ -1803,11 +1802,11 @@ h1#page-title {
 
 #block-block-3 {
   position:relative;
-	left: -200px;
-	top: -42px;
+  left: -200px;
+  top: -42px;
   padding: 10px 16px 6px;
-	background-color: #fff7e7;
-	-khtml-border-radius: 0px 0px 15px 15px;
+  background-color: #fff7e7;
+  -khtml-border-radius: 0px 0px 15px 15px;
   -moz-border-radius: 0px 0px 15px 15px;
   -webkit-border-bottom-left-radius: 15px;
   -webkit-border-bottom-right-radius: 15px;
@@ -1821,43 +1820,16 @@ h1#page-title {
 #block-block-3 .request a,
 #block-block-4 .request a {
   font-size: 13px;
- /* text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);
-  background-image: url("/ychenik/sites/default/files/button_red_160.png");
-  background-repeat: no-repeat;
-  background-position: center;  
-  padding: 10px 30px;
-	*/
 }
-/*#block-block-3 p {
-  font-size: 13px;
-  padding: 8px 5px 0;
-  margin-bottom: 5px;
-  text-align: center;
-  color: #ffffff;
-  position: relative;
-  top: -13px;
-}*/
 .views-view-grid
 .views-label {
   font-weight: bold;
-}
-/*.views-view-grid
-.views-field {
-  display: inline;
-}*/
-
-#field-rate-add-more-wrapper,
-#field-review-add-more-wrapper {
-/*display: none;*/
-}
-#block-block-7 {
-
 }
 .suggest ul {
   font-size: large;
   position: relative;
   top: 343px;
-	left:259px;
+  left:259px;
 }
 #testdiv {
   display: none;
@@ -1871,12 +1843,11 @@ h1#page-title {
 }
 .region-featured .block-views {
   width: 360px;
-	height: 178px;
+  height: 178px;
   float: left;
-	background: #eeeeee;
-/*	margin-bottom: 21px;*/
-	font-size: 87%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;	
+  background: #eeeeee;
+  font-size: 87%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;	
 }
 .region-featured .block-views img {
   padding-left: 0px;
@@ -1892,10 +1863,10 @@ h1#page-title {
 .views-field-field-city{
   position: relative;
   top: -65px;
-	text-align: left;
-	padding-left: 13px;
-	z-index: 3;
-	color: #ffffff;
+  text-align: left;
+  padding-left: 13px;
+  z-index: 3;
+  color: #ffffff;
 /*	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);*/
   text-shadow: none;
 }
@@ -1911,12 +1882,12 @@ h1#page-title {
 .views-field-field-description-1{
   position: relative;
   top: -115px;
-	height: 60px;
-	width: 352px;
-	z-index: 1;
-	background-color: #000000;
+  height: 60px;
+  width: 352px;
+  z-index: 1;
+  background-color: #000000;
   opacity: 0.3;
-	filter:alpha(opacity=30); /* For IE8 and earlier */
+  filter:alpha(opacity=30); /* For IE8 and earlier */
 }
 .featured #messages {
   position: relative;
@@ -1925,15 +1896,15 @@ h1#page-title {
 
 #block-block-17 {
   position: relative;
-	top: 67px;
-	left:	4px;
-	width: 1072px;
-	height: 103px;
+  top: 67px;
+  left:	4px;
+  width: 1072px;
+  height: 103px;
   background-color: #000000;
-	opacity: 0.2;
-	filter:alpha(opacity=20); /* For IE8 and earlier */
+  opacity: 0.2;
+  filter:alpha(opacity=20); /* For IE8 and earlier */
   color: #ffffff;
-	z-index: 2;
+  z-index: 2;
 
 }
 .region-featured
@@ -1943,7 +1914,7 @@ h1#page-title {
 .region-featured
 .views-field-field-location {
   font-size: 15px;
-	color: #ffffff;
+  color: #ffffff;
 }
 .region-featured
 .views-field-title a {
@@ -1951,20 +1922,19 @@ h1#page-title {
 }
 .usmessage {
   background-color: #F8FFF0;
-	margin: 28px 15px;
-	padding: 5px 5px 5px 30px;
-/*	background-image: url("/ychenik/misc/message-24-ok.png");*/
-	background-repeat: no-repeat;
+  margin: 28px 15px;
+  padding: 5px 5px 5px 30px;
+  background-repeat: no-repeat;
   background-position: left; 
-	border: 1px solid #BBEE77;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  border: 1px solid #BBEE77;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 table .mini-day-on a {
   color: #ffffff;
-	border: 1px solid #ff9999;;
-	text-decoration: none;
-	background: #ff9999;
+  border: 1px solid #ff9999;;
+  text-decoration: none;
+  background: #ff9999;
 }
 
 #block-views-calendar-block-1
@@ -1976,14 +1946,14 @@ table .mini-day-on a {
   z-index: 3;
 }
 .contextual-links-region {
-  z-index: 2; //for views edit
+  z-index: 2; /*for views edit*/
 }
 #block-views-calendar-block-1 {
   width: 90%;
   float: right;
   margin-top: 0px;
-	position: relative;
-	z-index: 3;
+  position: relative;
+  z-index: 3;
 }
 .date-nav {
   padding-bottom: 0;
@@ -1991,7 +1961,7 @@ table .mini-day-on a {
 #business-node-form
 .form-item-field-paid-und {
   background-color: #F8FFF0;
-	border: 1px solid #BBEE77;
+  border: 1px solid #BBEE77;
 }
 .view-advertisement
 .views-table {
@@ -2007,18 +1977,16 @@ select.form-select {
 }
 #link_biz {
 position: relative;
-z-index: 1;
+  z-index: 1;
 }
-
 .sidebar .block {
   padding:1px 7px;
 }
 /*patch for firefox and chrom*/
 /*business automplete form and views exposed filter*/
-
 .form-item {
   position: relative;
 }
 .view-empty {
-  display: none; // hide suggestion to filter anything... from new release of views
+  display: none; /* hide suggestion to filter anything... from new release of views*/
 } 
