@@ -717,15 +717,26 @@ ul.links {
   line-height: 1.6;
 }
 .comment .comment-arrow {
-  background: url(../images/comment-arrow.gif) no-repeat 0 center transparent; /* LTR */
+  /*background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;  LTR*/ 
   border-left: 1px solid;
-  border-right: 1px solid;
+  /*border-right: 1px solid;*/
   height: 40px;
   margin-left: -47px; /* LTR */
   margin-top: 10px;
   position: absolute;
   width: 20px;
 }
+/*.forum
+.comment .comment-arrow {
+  background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;  LTR 
+  border-left: 1px solid;
+  border-right: 1px solid;
+  height: 40px;
+  margin-left: -47px;  LTR 
+  margin-top: 10px;
+  position: absolute;
+  width: 20px;
+}*/
 .comment .comment-text {
   padding: 10px 25px;
   border: 1px solid #d3d7d9;
@@ -733,6 +744,7 @@ ul.links {
   vertical-align: top;
   position: relative;
   width: 100%;
+  background: #eee;
 }
 .comment .indented {
   margin-left: 40px; /* LTR */
@@ -1043,7 +1055,7 @@ ul.action-links li a {
 /* ---------------- Messages  ----------------- */
 
 #messages {
-  padding: 20px 0 5px;
+  padding: 5px 0 5px;
   margin: 0 auto;
 }
 
@@ -1245,7 +1257,7 @@ select.form-select {
 }
 input.form-submit:hover,
 input.form-submit:focus {
-  background: #dedede;
+  background: #50b6f2;
 }
 .password-suggestions ul li {
   margin-left: 1.2em; /* LTR */
@@ -1669,16 +1681,17 @@ div.admin-panel .description {
   background: #eeeeee;
   padding-left: 20px;
   padding-bottom: 1px;
+  z-index: 3;
 }
 .views-exposed-widgets .form-item input {
 	/* position: relative;
  top: -26px;*/
   color: #bf5d07;
   font-style: italic;
-  width: 321px;
+  width: 310px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
-  margin-top: 0px;
+  margin-top: 2px;
 
 }
 .views-exposed-form label {
@@ -1688,10 +1701,10 @@ div.admin-panel .description {
   padding-left: 10px;
   color: #999999;
 }
-.views-exposed-form .views-exposed-widget {
+/*.views-exposed-form .views-exposed-widget {
   float: left;
   padding: .5em 0.3em 0 0;
-}
+}*/
 
 #site-name {
   font-size: 2.3em;
@@ -1701,16 +1714,15 @@ div.admin-panel .description {
   color: #003366;
   font-weight: bold;
 }
-.node-parents 
-.field,
-.node-business 
-.field {
+
+.node-business .business-column1 .field,
+.node-business .business-column2 .field {
   background-color: #FFF7E7;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   margin: 0 0 5px 0;
   padding: 5px;
   font-weight: normal;
-  font-size: 1.1em !important;
+  /*font-size: 1.1em !important;*/
   color: #333333;
 }
 .node-parents .field-label,
@@ -1819,7 +1831,7 @@ h1#page-title {
   left: -250px;
   top: -37px;
   padding: 10px 16px 6px;
-  background-image: url("/ychenik_prod/sites/default/files/button.png");
+/*  background-image: url("/ychenik_prod/sites/default/files/button.png");*/
   background-position: center;
   background-repeat: no-repeat;
   
@@ -1839,9 +1851,17 @@ h1#page-title {
 #block-block-3 .request a,
 #block-block-4 .request a {
   position: relative;
+  background-image: url("/ychenik_prod/sites/default/files/button.png");
   top: -2px;
+  padding: 5px 15px;
   font-size: 13px;
   color: #ffffff;
+}
+#block-block-3 .request a:hover,
+#block-block-3 .request a:focus {
+  background: #50b6f2;
+  text-decoration: none;
+  border-bottom: 1px solid #999;
 }
 .views-view-grid
 .views-label {
@@ -2012,7 +2032,6 @@ select.form-select {
 .view-empty {
   display: none; /* hide suggestion to filter anything... from new release of views*/
 }
-
 input.form-submit,
 a.button {
   background: url("/ychenik_prod/sites/default/files/search.png");
@@ -2023,4 +2042,48 @@ a.button {
   -webkit-border-radius: 1px;
   border-radius: 1px;
   color: #ffffff;
+}
+.node-business-form 
+.form-item {
+  /*background: #ecf5fa;*/
+  background: #fff7e7;
+  padding: 10px;
+}
+#sidebar-second {
+  position: relative;
+  z-index: 3;
+}
+.view-news-page
+.views-field-field-date {
+  font-size: large;
+  font-weight: bold;
+}
+.view-news-page
+.views-field-title {
+  font-weight: bold;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.view-news-page
+.views-row-odd {
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #999;
+}
+.view-news-page
+.views-row-even {
+
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.view-news-page
+.views-field-field-news-image img {
+  padding:10px; 
+}
+.view-news a{
+  background-image: url("/ychenik_prod/sites/default/files/ball.png");
+  background-position: top left;
+  background-repeat: no-repeat;
+  padding-left: 15px; 
 }
