@@ -1976,7 +1976,7 @@ select.form-select {
   width: 167px;
 }
 #link_biz {
-position: relative;
+  position: relative;
   z-index: 1;
 }
 .sidebar .block {
@@ -1989,4 +1989,11 @@ position: relative;
 }
 .view-empty {
   display: none; /* hide suggestion to filter anything... from new release of views*/
-} 
+}
+#business-node-form
+.form-item-field-what-und label {
+  position: relative;
+  top: 25px;   
+  left: 5px;
+  color: #999999;
+}
