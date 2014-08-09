@@ -46,7 +46,6 @@ function simple_fb_connect_permission() {
  */
 function simple_fb_connect_login() {
   $facebook = facebook_client();
-  $acc = $facebook->getAccessToken();
   $fb_user = $facebook->getUser();
 
   if ($fb_user) {
@@ -145,8 +144,17 @@ function simple_fb_connect_login() {
   else {
     if (!isset($_REQUEST['error'])) {
       if (variable_get('simple_fb_connect_appid', 0)) {
+        $scope_string = '';
+        // Make sure at least one module implements our hook.
+        if (sizeof(module_implements('simple_fb_scope_info')) > 0) {
+          // Call modules that implement the hook, and let them change scope.
+          $scopes = module_invoke_all('simple_fb_scope_info', array());
+          $scope_string = implode(',', $scopes);
+        }
+        $scope_string .= ',email';
+
         $login_url_params = array(
-          'scope' => 'email',
+          'scope' => $scope_string,
           'fbconnect' => 1,
           'redirect_uri' => 'http://' . $_SERVER['HTTP_HOST'] . request_uri(),
         );

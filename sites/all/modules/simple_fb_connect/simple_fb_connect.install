@@ -49,3 +49,13 @@ function simple_fb_connect_requirements($phase) {
 
   return $requirements;
 }
+
+/**
+ * Implements hook_uninstall().
+ */
+function simple_fb_connect_uninstall() {
+  variable_del('simple_fb_connect_appid');
+  variable_del('simple_fb_connect_skey');
+  variable_del('simple_fb_connect_login_only');
+  variable_del('simple_fb_connect_post_login_url');
+}
