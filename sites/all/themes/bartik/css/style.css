@@ -122,6 +122,7 @@ p.comment-time,
 table,
 .breadcrumb {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  z-index: 1;
 }
 input,
 textarea,
@@ -313,10 +314,16 @@ h1#site-name {
   font-weight: normal;
 }
 #site-slogan {
-  font-size: 0.929em;
-  margin-top: 7px;
+  position: relative;
+  top: 50px;
+  left: -326px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 1.529em;
   word-spacing: 0.1em;
-  font-style: italic;
+  font-family: Tekton Pro;
+  color: #2d7dcf;
+
 }
 /* Region header blocks. */
 .region-header .block {
@@ -512,7 +519,7 @@ h1#site-name {
 #secondary-menu-links {
   float: right; /* LTR */
   font-size: 0.929em;
-  margin: 10px 10px 0;
+  margin: 16px 10px 0;
 }
 #secondary-menu-links a:hover,
 #secondary-menu-links a:focus {
@@ -535,9 +542,9 @@ h1#site-name {
   line-height: 1.4;
   padding: 0px 0 25px;
   margin: 0;
-  background: #f0f0f0;
+  /*   background: #eeeeee;
   background: rgba(30, 50, 10, 0.08);
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;*/
   text-shadow: 1px 1px #fff;
 }
 #featured h2 {
@@ -711,15 +718,26 @@ ul.links {
   line-height: 1.6;
 }
 .comment .comment-arrow {
-  background: url(../images/comment-arrow.gif) no-repeat 0 center transparent; /* LTR */
+  /*background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;  LTR*/ 
   border-left: 1px solid;
-  border-right: 1px solid;
+  /*border-right: 1px solid;*/
   height: 40px;
   margin-left: -47px; /* LTR */
   margin-top: 10px;
   position: absolute;
   width: 20px;
 }
+/*.forum
+.comment .comment-arrow {
+  background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;  LTR 
+  border-left: 1px solid;
+  border-right: 1px solid;
+  height: 40px;
+  margin-left: -47px;  LTR 
+  margin-top: 10px;
+  position: absolute;
+  width: 20px;
+}*/
 .comment .comment-text {
   padding: 10px 25px;
   border: 1px solid #d3d7d9;
@@ -727,6 +745,7 @@ ul.links {
   vertical-align: top;
   position: relative;
   width: 100%;
+  background: #eee;
 }
 .comment .indented {
   margin-left: 40px; /* LTR */
@@ -954,6 +973,8 @@ ul.links {
 .tabs {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 20px;
+    position: relative;  
+  z-index: 3;
 }
 .tabs ul.primary {
   padding: 0 3px;
@@ -961,6 +982,7 @@ ul.links {
   overflow: hidden;
   border: none;
   background: transparent url(../images/tabs-border.png) repeat-x left bottom;
+
 }
 .tabs ul.primary li {
   display: block;
@@ -1037,7 +1059,7 @@ ul.action-links li a {
 /* ---------------- Messages  ----------------- */
 
 #messages {
-  padding: 20px 0 5px;
+  padding: 5px 0 5px;
   margin: 0 auto;
 }
 
@@ -1239,7 +1261,7 @@ select.form-select {
 }
 input.form-submit:hover,
 input.form-submit:focus {
-  background: #dedede;
+  background: #50b6f2;
 }
 .password-suggestions ul li {
   margin-left: 1.2em; /* LTR */
@@ -1660,45 +1682,52 @@ div.admin-panel .description {
 .views-exposed-form { 
   position: relative;
   text-align: left;
+  background: #eeeeee;
+  padding-left: 20px;
+  padding-bottom: 1px;
+  z-index: 3;
 }
 .views-exposed-widgets .form-item input {
 	/* position: relative;
  top: -26px;*/
-	color: #bf5d07;
+  color: #bf5d07;
   font-style: italic;
-	width: 321px;
+  width: 310px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
-margin-top: 0px;
+  margin-top: 2px;
+
 }
 .views-exposed-form label {
-position: absolute;
-top: 11px;
-z-index: 1;
-padding-left: 10px;
-color: #999999;
+  position: absolute;
+  top: 11px;
+  z-index: 1;
+  padding-left: 10px;
+  color: #999999;
 }
+/*.views-exposed-form .views-exposed-widget {
+  float: left;
+  padding: .5em 0.3em 0 0;
+}*/
 
 #site-name {
   font-size: 2.3em;
   font-style: italic;
-  background-image: sites/deafault/files/sitename.jpg
 }
 #site-name a {
-color: #003366;
-font-weight: bold;
+  color: #003366;
+  font-weight: bold;
 }
-.node-parents 
-.field,
-.node-business 
-.field {
-background-color: #FFF7E7;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-margin: 0 0 5px 0;
-padding: 5px;
-font-weight: normal;
-font-size: 1.1em !important;
-color: #333333;
+
+.node-business .business-column1 .field,
+.node-business .business-column2 .field {
+  background-color: #E7F4FF;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  margin: 0 0 5px 0;
+  padding: 5px;
+  font-weight: normal;
+  /*font-size: 1.1em !important;*/
+  color: #333333;
 }
 .node-parents .field-label,
 .node-business .field-label{
@@ -1800,64 +1829,15 @@ h1#page-title {
   font-family: Arial, Helvetica, sans-serif;
   color: #007ACC;
 }
-
-#block-block-3 {
-  position:relative;
-	left: -200px;
-	top: -42px;
-  padding: 10px 16px 6px;
-	background-color: #fff7e7;
-	-khtml-border-radius: 0px 0px 15px 15px;
-  -moz-border-radius: 0px 0px 15px 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-radius: 0px 0px 15px 15px;
-}
-
-#block-block-4 {
-  padding: 0px 6px 0px;
-  margin: 0;
-}
-#block-block-3 .request a,
-#block-block-4 .request a {
-  font-size: 13px;
- /* text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);
-  background-image: url("/ychenik/sites/default/files/button_red_160.png");
-  background-repeat: no-repeat;
-  background-position: center;  
-  padding: 10px 30px;
-	*/
-}
-/*#block-block-3 p {
-  font-size: 13px;
-  padding: 8px 5px 0;
-  margin-bottom: 5px;
-  text-align: center;
-  color: #ffffff;
-  position: relative;
-  top: -13px;
-}*/
 .views-view-grid
 .views-label {
   font-weight: bold;
-}
-/*.views-view-grid
-.views-field {
-  display: inline;
-}*/
-
-#field-rate-add-more-wrapper,
-#field-review-add-more-wrapper {
-/*display: none;*/
-}
-#block-block-7 {
-
 }
 .suggest ul {
   font-size: large;
   position: relative;
   top: 343px;
-	left:259px;
+  left:259px;
 }
 #testdiv {
   display: none;
@@ -1868,15 +1848,16 @@ h1#page-title {
 /* Billboard's blocks*/
 #featured {
   padding: 0;
+  background: #eeeeee;
 }
 .region-featured .block-views {
   width: 360px;
-	height: 178px;
+  height: 160px;
   float: left;
-	background: #eeeeee;
-/*	margin-bottom: 21px;*/
-	font-size: 87%;
-	font-family: Verdana, Arial, Helvetica, sans-serif;	
+  font-size: 87%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  position: relative;
+  top: -10px;
 }
 .region-featured .block-views img {
   padding-left: 0px;
@@ -1892,16 +1873,17 @@ h1#page-title {
 .views-field-field-city{
   position: relative;
   top: -65px;
-	text-align: left;
-	padding-left: 13px;
-	z-index: 3;
-	color: #ffffff;
+  text-align: left;
+  padding-left: 13px;
+  z-index: 3;
+  color: #ffffff;
 /*	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);*/
   text-shadow: none;
+  font-size: 18px;
 }
 .region-featured
 .views-field-field-city{
-  font-size: 15px;
+  font-size: 14px;
 }
 
 
@@ -1910,13 +1892,13 @@ h1#page-title {
 .region-featured
 .views-field-field-description-1{
   position: relative;
-  top: -115px;
-	height: 60px;
-	width: 352px;
-	z-index: 1;
-	background-color: #000000;
+  top: -108px;
+  height: 45px;
+  width: 360px;
+  z-index: 1;
+  background-color: #000000;
   opacity: 0.3;
-	filter:alpha(opacity=30); /* For IE8 and earlier */
+  filter:alpha(opacity=30); /* For IE8 and earlier */
 }
 .featured #messages {
   position: relative;
@@ -1925,15 +1907,15 @@ h1#page-title {
 
 #block-block-17 {
   position: relative;
-	top: 67px;
-	left:	4px;
-	width: 1072px;
-	height: 103px;
+  top: 67px;
+  left:	4px;
+  width: 1072px;
+  height: 103px;
   background-color: #000000;
-	opacity: 0.2;
-	filter:alpha(opacity=20); /* For IE8 and earlier */
+  opacity: 0.2;
+  filter:alpha(opacity=20); /* For IE8 and earlier */
   color: #ffffff;
-	z-index: 2;
+  z-index: 2;
 
 }
 .region-featured
@@ -1943,7 +1925,7 @@ h1#page-title {
 .region-featured
 .views-field-field-location {
   font-size: 15px;
-	color: #ffffff;
+  color: #ffffff;
 }
 .region-featured
 .views-field-title a {
@@ -1951,20 +1933,19 @@ h1#page-title {
 }
 .usmessage {
   background-color: #F8FFF0;
-	margin: 28px 15px;
-	padding: 5px 5px 5px 30px;
-/*	background-image: url("/ychenik/misc/message-24-ok.png");*/
-	background-repeat: no-repeat;
+  margin: 28px 15px;
+  padding: 5px 5px 5px 30px;
+  background-repeat: no-repeat;
   background-position: left; 
-	border: 1px solid #BBEE77;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  border: 1px solid #BBEE77;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 table .mini-day-on a {
   color: #ffffff;
-	border: 1px solid #ff9999;;
-	text-decoration: none;
-	background: #ff9999;
+  border: 1px solid #ff9999;;
+  text-decoration: none;
+  background: #ff9999;
 }
 
 #block-views-calendar-block-1
@@ -1976,14 +1957,14 @@ table .mini-day-on a {
   z-index: 3;
 }
 .contextual-links-region {
-  z-index: 2; //for views edit
+  z-index: 2; /*for views edit*/
 }
 #block-views-calendar-block-1 {
   width: 90%;
   float: right;
   margin-top: 0px;
-	position: relative;
-	z-index: 3;
+  position: relative;
+  z-index: 3;
 }
 .date-nav {
   padding-bottom: 0;
@@ -1991,7 +1972,7 @@ table .mini-day-on a {
 #business-node-form
 .form-item-field-paid-und {
   background-color: #F8FFF0;
-	border: 1px solid #BBEE77;
+  border: 1px solid #BBEE77;
 }
 .view-advertisement
 .views-table {
@@ -2005,20 +1986,99 @@ table .mini-day-on a {
 select.form-select {
   width: 167px;
 }
-#link_biz {
-position: relative;
-z-index: 1;
+.view-events-bar {
+  height: 150px;
+  overflow-y: auto;
 }
-
+#link_biz {
+  position: relative;
+  z-index: 1;
+}
 .sidebar .block {
   padding:1px 7px;
 }
 /*patch for firefox and chrom*/
 /*business automplete form and views exposed filter*/
-
 .form-item {
   position: relative;
 }
 .view-empty {
-  display: none; // hide suggestion to filter anything... from new release of views
-} 
+  display: none; /* hide suggestion to filter anything... from new release of views*/
+}
+input.form-submit,
+a.button {
+  background: url("/ychenik_prod/sites/default/files/search.png");
+  padding: 4px 23px;
+  -khtml-border-radius: 1px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  color: #ffffff;
+}
+.node-business-form 
+.form-item {
+  /*background: #ecf5fa;*/
+  background: #e7f4ff;
+  padding: 10px;
+}
+#sidebar-second {
+  position: relative;
+  z-index: 3;
+}
+.view-news-page
+.views-field-field-date {
+  font-size: large;
+  font-weight: bold;
+}
+.view-news-page
+.views-field-title {
+  font-weight: bold;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.view-news-page
+.views-row-odd {
+  background: #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #999;
+}
+.view-news-page
+.views-row-even {
+
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.view-news-page
+.views-field-field-news-image img {
+  padding:10px; 
+}
+.view-news a{
+  background-image: url("/ychenik_prod/sites/default/files/ball.png");
+  background-position: top left;
+  background-repeat: no-repeat;
+  padding-left: 15px; 
+}
+.fb_tab {
+  background-image: url("/ychenik_prod/sites/default/files/images/fb_icon.png");
+  background-position: 80px 0px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 90px;
+}
+.menu-2079 {
+  background-image: url("/ychenik_prod/sites/default/files/button.png");
+  padding: 4px 0 !important;
+  margin-right: 10px;
+}
+.menu-2079 a {
+  color: #ffffff !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.menu-2079 a:hover,
+.menu-2079 a:focus {
+  background: #50b6f2;
+  padding: 4px 10px !important;
+  text-decoration: none !important;
+}

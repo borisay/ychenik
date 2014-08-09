@@ -2385,7 +2385,7 @@ function theme_comment_post_forbidden($variables) {
 
       if (variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)) {
         // Users can register themselves.
-        return t('<a href="@login">Log in</a> or <a href="@register">register</a> to post comments', array('@login' => url('user/login', array('query' => $destination)), '@register' => url('user/register', array('query' => $destination))));
+        return t('<a href="@login">Sign In</a> to post comments', array('@login' => url('user/login', array('query' => $destination))));
       }
       else {
         // Only admins can add new users, no public registration.
