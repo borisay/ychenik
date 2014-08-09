@@ -122,6 +122,7 @@ p.comment-time,
 table,
 .breadcrumb {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  z-index: 1;
 }
 input,
 textarea,
@@ -541,7 +542,7 @@ h1#site-name {
   line-height: 1.4;
   padding: 0px 0 25px;
   margin: 0;
-/*  background: #f0f0f0;
+  /*   background: #eeeeee;
   background: rgba(30, 50, 10, 0.08);
   border-bottom: 1px solid #e7e7e7;*/
   text-shadow: 1px 1px #fff;
@@ -972,6 +973,8 @@ ul.links {
 .tabs {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 20px;
+    position: relative;  
+  z-index: 3;
 }
 .tabs ul.primary {
   padding: 0 3px;
@@ -979,6 +982,7 @@ ul.links {
   overflow: hidden;
   border: none;
   background: transparent url(../images/tabs-border.png) repeat-x left bottom;
+
 }
 .tabs ul.primary li {
   display: block;
@@ -1717,7 +1721,7 @@ div.admin-panel .description {
 
 .node-business .business-column1 .field,
 .node-business .business-column2 .field {
-  background-color: #FFF7E7;
+  background-color: #E7F4FF;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   margin: 0 0 5px 0;
   padding: 5px;
@@ -1825,44 +1829,6 @@ h1#page-title {
   font-family: Arial, Helvetica, sans-serif;
   color: #007ACC;
 }
-
-#block-block-3 {
-  position:relative;
-  left: -250px;
-  top: -37px;
-  padding: 10px 16px 6px;
-/*  background-image: url("/ychenik_prod/sites/default/files/button.png");*/
-  background-position: center;
-  background-repeat: no-repeat;
-  
-
-  /*  background-color: #fff7e7;
-  -khtml-border-radius: 0px 0px 15px 15px;
-  -moz-border-radius: 0px 0px 15px 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-radius: 0px 0px 15px 15px;*/
-}
-
-#block-block-4 {
-  padding: 0px 6px 0px;
-  margin: 0;
-}
-#block-block-3 .request a,
-#block-block-4 .request a {
-  position: relative;
-  background-image: url("/ychenik_prod/sites/default/files/button.png");
-  top: -2px;
-  padding: 5px 15px;
-  font-size: 13px;
-  color: #ffffff;
-}
-#block-block-3 .request a:hover,
-#block-block-3 .request a:focus {
-  background: #50b6f2;
-  text-decoration: none;
-  border-bottom: 1px solid #999;
-}
 .views-view-grid
 .views-label {
   font-weight: bold;
@@ -1882,14 +1848,16 @@ h1#page-title {
 /* Billboard's blocks*/
 #featured {
   padding: 0;
+  background: #eeeeee;
 }
 .region-featured .block-views {
-  width: 352px;
-  height: 178px;
+  width: 360px;
+  height: 160px;
   float: left;
-  /*background: #eeeeee;*/
   font-size: 87%;
-  font-family: Verdana, Arial, Helvetica, sans-serif;	
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  position: relative;
+  top: -10px;
 }
 .region-featured .block-views img {
   padding-left: 0px;
@@ -1911,10 +1879,11 @@ h1#page-title {
   color: #ffffff;
 /*	text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.4);*/
   text-shadow: none;
+  font-size: 18px;
 }
 .region-featured
 .views-field-field-city{
-  font-size: 15px;
+  font-size: 14px;
 }
 
 
@@ -1923,9 +1892,9 @@ h1#page-title {
 .region-featured
 .views-field-field-description-1{
   position: relative;
-  top: -115px;
-  height: 60px;
-  width: 352px;
+  top: -108px;
+  height: 45px;
+  width: 360px;
   z-index: 1;
   background-color: #000000;
   opacity: 0.3;
@@ -2017,6 +1986,10 @@ table .mini-day-on a {
 select.form-select {
   width: 167px;
 }
+.view-events-bar {
+  height: 150px;
+  overflow-y: auto;
+}
 #link_biz {
   position: relative;
   z-index: 1;
@@ -2036,7 +2009,6 @@ input.form-submit,
 a.button {
   background: url("/ychenik_prod/sites/default/files/search.png");
   padding: 4px 23px;
-
   -khtml-border-radius: 1px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 1px;
@@ -2046,7 +2018,7 @@ a.button {
 .node-business-form 
 .form-item {
   /*background: #ecf5fa;*/
-  background: #fff7e7;
+  background: #e7f4ff;
   padding: 10px;
 }
 #sidebar-second {
@@ -2086,4 +2058,27 @@ a.button {
   background-position: top left;
   background-repeat: no-repeat;
   padding-left: 15px; 
+}
+.fb_tab {
+  background-image: url("/ychenik_prod/sites/default/files/images/fb_icon.png");
+  background-position: 80px 0px;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 90px;
+}
+.menu-2079 {
+  background-image: url("/ychenik_prod/sites/default/files/button.png");
+  padding: 4px 0 !important;
+  margin-right: 10px;
+}
+.menu-2079 a {
+  color: #ffffff !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.menu-2079 a:hover,
+.menu-2079 a:focus {
+  background: #50b6f2;
+  padding: 4px 10px !important;
+  text-decoration: none !important;
 }

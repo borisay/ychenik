@@ -124,15 +124,15 @@ function bartik_preprocess_node(&$variables) {
       else {
         $url = $uri_trim;
       }
-      $uri = $node->field_website[LANGUAGE_NONE][0]['value'];
-      $uri_trim = ltrim($uri);
-		  $four_uri = substr ($uri_trim, 0, 4);
-      if ($four_uri != 'http') {
-        $url = substr_replace($uri_trim, 'http://',0,0);
-      } 
-      else {
-        $url = $uri_trim;
-      }
+//      $uri = $node->field_website[LANGUAGE_NONE][0]['value'];
+//      $uri_trim = ltrim($uri);
+//		  $four_uri = substr ($uri_trim, 0, 4);
+//      if ($four_uri != 'http') {
+//        $url = substr_replace($uri_trim, 'http://',0,0);
+//      } 
+//      else {
+//        $url = $uri_trim;
+//      }
 				
       $text = 'Website link';
       $variables['biz_web_link'] = l($text, $url); // Using Drupal's l() function to render a link
@@ -179,4 +179,24 @@ function bartik_field__taxonomy_term_reference($variables) {
   $output = '<div class="' . $variables['classes'] . (!in_array('clearfix', $variables['classes_array']) ? ' clearfix' : '') . '"' . $variables['attributes'] .'>' . $output . '</div>';
 
   return $output;
+}
+/**
+ * Add a class to third tab
+ */
+function bartik_menu_local_tasks_alter(&$data,$router_item, &$root_path) {
+  if ($root_path == 'user/register' || $root_path == 'user' || $root_path == 'user/password') {
+        //add classes to the tabs. I left out tab 0 which is the active tab
+        //and styled differently. It comes with active as a class.
+        $tab2 = &$data['tabs'][0]['output'][2];
+        $tab2['#link']['localized_options']['attributes']['class'][] = 'fb_tab';
+  }
+}
+/**
+ * Rename the user/login page
+ */
+function bartik_preprocess_page(&$vars){
+  $path = $_GET['q'];
+  if ($path == 'user/login') {
+    drupal_set_title('User account');
+  }
 }
