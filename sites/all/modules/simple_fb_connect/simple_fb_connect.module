@@ -127,7 +127,7 @@ function simple_fb_connect_login() {
           // Manually set the password so it appears in the e-mail.
           $account->password = $fields['pass'];
           // Send the e-mail through the user module.
-          drupal_mail('user', 'register_no_approval_required', $account->mail, NULL, array('account' => $account), variable_get('site_mail', 'admin@drupalsite.com'));
+//          drupal_mail('user', 'register_no_approval_required', $account->mail, NULL, array('account' => $account), variable_get('site_mail', 'admin@drupalsite.com'));
           drupal_set_message(t('You have been registered with the username !username', array('!username' => $account->name)));
           drupal_goto("user/simple-fb-connect");
         }
