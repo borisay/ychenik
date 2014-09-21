@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Bartik's theme implementation to display a node.
+ * Subartik's theme implementation to display a node.
  *
  * Available variables:
  * - $title: the (sanitized) title of the node.
@@ -79,6 +79,7 @@
  */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
+
   <?php print render($title_prefix); ?>
   <?php if (!$page): ?>
     <h2<?php print $title_attributes; ?>>
@@ -94,34 +95,15 @@
     </div>
   <?php endif; ?>
 
-  <div class="content clearfix"
-  <?php 
-  print $content_attributes; 
-  ?>
-  >
-    <div class="business-column1">
+  <div class="content clearfix"<?php print $content_attributes; ?>>
     <?php
-      // We make the first column and hide the field for the second column and 
-	    //the comments and links now so that we can render them later
+      // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
-	    hide($content['field_image']);
-	    hide($content['field_description']);	  
       print render($content);
-			if(isset($node->field_website['und'][0]['value'])) { 
-        print $biz_web_link;
-      }
     ?>
-    </div>
-    <div class="business-column2">
-    <?php
-      // We make second column for 'business' pictures 
-	  // print ('This is the div for the column 2');
-      print render($content['field_image']);
-	    print render($content['field_description']);
-    ?>
-    </div>
   </div>
+
   <?php
     // Remove the "Add new comment" link on the teaser page or if the comment
     // form is being displayed on the same page.
@@ -137,25 +119,6 @@
     </div>
   <?php endif; ?>
 
-  <?php print render($content['comments']); ?>
-  
-  <?php
-  if(!empty($node->field_rating['und'][0]['average']) && !empty($node->field_rating['und'][0]['count'])) {
-//  if(array_key_exists('average', $node->field_rating['und'][0]) && array_key_exists('count', $node->field_rating['und'][0]) && !empty($node->field_rating['und'][0]['average']) && !empty($node->field_rating['und'][0]['count'])) {
-//creating dublicate fields for 'Average' and 'Count'
-//in fields 'Rate' and 'Review'
-	  
-//		var_dump($node->field_rating['und'][0]);
-    $node = node_load($node->nid);
-    if(isset($node->field_rating['und'][0]['average'])) { //w/o got "Notice: Undefined index:..."
-      $node->field_rate['und'][0]['value'] = $node->field_rating['und'][0]['average'];
-    }
-    if(isset($node->field_rating['und'][0]['count'])) {
-      $node->field_review['und'][0]['value'] = $node->field_rating['und'][0]['count'];
-    }			
-      field_attach_update('node', $node);
-
-	}
-  ?>
+  <?php print render($content['comments']);?> 
 
 </div>

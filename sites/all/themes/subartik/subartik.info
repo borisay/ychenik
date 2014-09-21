@@ -1,14 +1,11 @@
 
-name = Bartik
+name = Subartik
 description = A flexible, recolorable theme with many regions.
-package = Core
-version = VERSION
+
 core = 7.x
 
 stylesheets[all][] = css/layout.css
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/colors.css
-stylesheets[print][] = css/print.css
 
 regions[header] = Header
 regions[help] = Help
@@ -33,9 +30,4 @@ regions[footer] = Footer
 
 settings[shortcut_module_link] = 0
 
-
-; Information added by  packaging script on 2013-11-20
-version = "7.24"
-project = "drupal"
-datestamp = "1384983240"
 

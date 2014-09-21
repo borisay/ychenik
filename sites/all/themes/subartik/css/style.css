@@ -1692,11 +1692,18 @@ div.admin-panel .description {
  top: -26px;*/
   color: #bf5d07;
   font-style: italic;
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
   width: 310px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
   margin-top: 2px;
 
+=======
+  width: 321px;
+}
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 0px;
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
 }
 .views-exposed-form label {
   position: absolute;
@@ -1718,15 +1725,27 @@ div.admin-panel .description {
   color: #003366;
   font-weight: bold;
 }
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
 
 .node-business .business-column1 .field,
 .node-business .business-column2 .field {
   background-color: #E7F4FF;
+=======
+.node-parents 
+.field,
+.node-business 
+.field {
+  background-color: #FFF7E7;
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
   font-family: Verdana, Arial, Helvetica, sans-serif;
   margin: 0 0 5px 0;
   padding: 5px;
   font-weight: normal;
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
   /*font-size: 1.1em !important;*/
+=======
+  font-size: 1.1em !important;
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
   color: #333333;
 }
 .node-parents .field-label,
@@ -1829,6 +1848,31 @@ h1#page-title {
   font-family: Arial, Helvetica, sans-serif;
   color: #007ACC;
 }
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
+=======
+
+#block-block-3 {
+  position:relative;
+  left: -200px;
+  top: -42px;
+  padding: 10px 16px 6px;
+  background-color: #fff7e7;
+  -khtml-border-radius: 0px 0px 15px 15px;
+  -moz-border-radius: 0px 0px 15px 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  border-radius: 0px 0px 15px 15px;
+}
+
+#block-block-4 {
+  padding: 0px 6px 0px;
+  margin: 0;
+}
+#block-block-3 .request a,
+#block-block-4 .request a {
+  font-size: 13px;
+}
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
 .views-view-grid
 .views-label {
   font-weight: bold;
@@ -1852,12 +1896,20 @@ h1#page-title {
 }
 .region-featured .block-views {
   width: 360px;
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
   height: 160px;
   float: left;
   font-size: 87%;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   position: relative;
   top: -10px;
+=======
+  height: 178px;
+  float: left;
+  background: #eeeeee;
+  font-size: 87%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;	
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
 }
 .region-featured .block-views img {
   padding-left: 0px;
@@ -1892,9 +1944,15 @@ h1#page-title {
 .region-featured
 .views-field-field-description-1{
   position: relative;
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
   top: -108px;
   height: 45px;
   width: 360px;
+=======
+  top: -115px;
+  height: 60px;
+  width: 352px;
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
   z-index: 1;
   background-color: #000000;
   opacity: 0.3;
@@ -2005,6 +2063,7 @@ select.form-select {
 .view-empty {
   display: none; /* hide suggestion to filter anything... from new release of views*/
 }
+<<<<<<< HEAD:sites/all/themes/bartik/css/style.css
 input.form-submit,
 a.button {
   background: url("/ychenik_prod/sites/default/files/search.png");
@@ -2082,3 +2141,13 @@ a.button {
   padding: 4px 10px !important;
   text-decoration: none !important;
 }
+=======
+/*#business-node-form
+.form-item-field-what-und label {
+  position: absolute;
+  top: 6px;
+  z-index: 1;
+  padding-left: 10px;
+  color: #999999;
+}*/
+>>>>>>> daf76c68c74ec2d588a366698b2a485d076a676a:sites/all/themes/subartik/css/style.css
