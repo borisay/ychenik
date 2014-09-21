@@ -1692,18 +1692,11 @@ div.admin-panel .description {
  top: -26px;*/
   color: #bf5d07;
   font-style: italic;
-<<<<<<< HEAD
-  width: 321px;
-}
-.views-exposed-form .views-exposed-widget .form-submit {
-  margin-top: 0px;
-=======
   width: 310px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
   margin-top: 2px;
 
->>>>>>> prod
 }
 .views-exposed-form label {
   position: absolute;
@@ -1725,27 +1718,15 @@ div.admin-panel .description {
   color: #003366;
   font-weight: bold;
 }
-<<<<<<< HEAD
-.node-parents 
-.field,
-.node-business 
-.field {
-  background-color: #FFF7E7;
-=======
 
 .node-business .business-column1 .field,
 .node-business .business-column2 .field {
   background-color: #E7F4FF;
->>>>>>> prod
   font-family: Verdana, Arial, Helvetica, sans-serif;
   margin: 0 0 5px 0;
   padding: 5px;
   font-weight: normal;
-<<<<<<< HEAD
-  font-size: 1.1em !important;
-=======
   /*font-size: 1.1em !important;*/
->>>>>>> prod
   color: #333333;
 }
 .node-parents .field-label,
@@ -1848,31 +1829,6 @@ h1#page-title {
   font-family: Arial, Helvetica, sans-serif;
   color: #007ACC;
 }
-<<<<<<< HEAD
-
-#block-block-3 {
-  position:relative;
-  left: -200px;
-  top: -42px;
-  padding: 10px 16px 6px;
-  background-color: #fff7e7;
-  -khtml-border-radius: 0px 0px 15px 15px;
-  -moz-border-radius: 0px 0px 15px 15px;
-  -webkit-border-bottom-left-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-  border-radius: 0px 0px 15px 15px;
-}
-
-#block-block-4 {
-  padding: 0px 6px 0px;
-  margin: 0;
-}
-#block-block-3 .request a,
-#block-block-4 .request a {
-  font-size: 13px;
-}
-=======
->>>>>>> prod
 .views-view-grid
 .views-label {
   font-weight: bold;
@@ -1896,20 +1852,12 @@ h1#page-title {
 }
 .region-featured .block-views {
   width: 360px;
-<<<<<<< HEAD
-  height: 178px;
-  float: left;
-  background: #eeeeee;
-  font-size: 87%;
-  font-family: Verdana, Arial, Helvetica, sans-serif;	
-=======
   height: 160px;
   float: left;
   font-size: 87%;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   position: relative;
   top: -10px;
->>>>>>> prod
 }
 .region-featured .block-views img {
   padding-left: 0px;
@@ -1944,15 +1892,9 @@ h1#page-title {
 .region-featured
 .views-field-field-description-1{
   position: relative;
-<<<<<<< HEAD
-  top: -115px;
-  height: 60px;
-  width: 352px;
-=======
   top: -108px;
   height: 45px;
   width: 360px;
->>>>>>> prod
   z-index: 1;
   background-color: #000000;
   opacity: 0.3;
@@ -2063,15 +2005,6 @@ select.form-select {
 .view-empty {
   display: none; /* hide suggestion to filter anything... from new release of views*/
 }
-<<<<<<< HEAD
-#business-node-form
-.form-item-field-what-und label {
-  position: relative;
-  top: 25px;   
-  left: 5px;
-  color: #999999;
-}
-=======
 input.form-submit,
 a.button {
   background: url("/ychenik_prod/sites/default/files/search.png");
@@ -2121,20 +2054,20 @@ a.button {
   padding:10px; 
 }
 .view-news a{
-  background-image: url("/ychenik_prod/sites/default/files/ball.png");
+  background-image: url("/ychenik/sites/default/files/ball.png");
   background-position: top left;
   background-repeat: no-repeat;
   padding-left: 15px; 
 }
 .fb_tab {
-  background-image: url("/ychenik_prod/sites/default/files/images/fb_icon.png");
+  background-image: url("../../../../default/files/images/fb_icon.png");
   background-position: 80px 0px;
   background-repeat: no-repeat;
   background-size: auto;
   width: 90px;
 }
 .menu-2079 {
-  background-image: url("/ychenik_prod/sites/default/files/button.png");
+  background-image: url("../../../../default/files/button.png");
   padding: 4px 0 !important;
   margin-right: 10px;
 }
@@ -2149,4 +2082,3 @@ a.button {
   padding: 4px 10px !important;
   text-decoration: none !important;
 }
->>>>>>> prod
