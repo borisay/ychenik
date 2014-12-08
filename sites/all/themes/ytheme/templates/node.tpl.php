@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Subartik's theme implementation to display a node.
+ * Bartik's theme implementation to display a node.
  *
  * Available variables:
  * - $title: the (sanitized) title of the node.
@@ -119,6 +119,6 @@
     </div>
   <?php endif; ?>
 
-  <?php print render($content['comments']);?> 
+  <?php print render($content['comments']); ?>
 
 </div>

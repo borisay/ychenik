@@ -1,3 +1,7 @@
+<?php
+//.tpl file for article content
+?>
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
   <?php print render($title_prefix); ?>
@@ -16,12 +20,16 @@
   <?php endif; ?>
 
   <div class="content clearfix"<?php print $content_attributes; ?>>
+    <div class="fb-share">      
+      <iframe src="//www.facebook.com/plugins/share_button.php?href=<?php $curr_url = check_plain("http://" .$_SERVER['HTTP_HOST'] .$node_url); echo $curr_url; ?>&amp;layout=button_count&amp" scrolling="no" frameborder="0" style="border:none; overflow:hidden;" allowTransparency="true"></iframe>  
+    </div>
     <?php
       // We hide the comments and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
       print render($content);
     ?>
+   
   </div>
 
   <?php
@@ -39,32 +47,6 @@
     </div>
   <?php endif; ?>
 
-  <?php print render($content['comments']);?> 
+  <?php print render($content['comments']); ?>
 
 </div>
-
-<?php
-/*    $date = getdate();
-		$node = node_load($node->nid);
-    if(!empty($node->field_ad_finish['und'][0]['value']) ) { //w/o got "Notice: Undefined index:..."
-		$finish = $node->field_ad_finish['und'][0]['value'];
-		$remain = $finish-$date[0];
-      $d_r = round($remain/(60*60*24));
-			$h_r = ($remain/(60*60))%24;
-			$m_r = ($remain/60)%60;
-			if ($remain >=0) {
-				$node->field_ad_status['und'][0]['value'] = 'Active';
-				$node->field_ad_remain['und'][0]['value'] = $d_r.' days '.$h_r.' hours';
-
-				field_attach_update('node', $node);
-				
-			}else{
-				$node->field_ad_status['und'][0]['value'] = 'Complete';
-				$node->field_ad_remain['und'][0]['value'] = '0 days  0 hours';	
-		    
-				field_attach_update('node', $node);
-				
-		  }
-	  }
-*/	
-?>
