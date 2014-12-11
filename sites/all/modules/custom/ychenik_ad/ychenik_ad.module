@@ -1,0 +1,464 @@
+<?php
+/**
+ * Implements hook_block_info()
+ */
+function ychenik_ad_block_info() {
+  $blocks = array();
+  $blocks['ychenik_ad_form'] = array(
+  'info' => t('Ychenik Ad'),
+  'cache' => DRUPAL_CACHE_GLOBAL,
+  );     
+    return $blocks;
+}
+     
+/**	
+ * Implements hook_block_view().
+ * This function tells drupal how to define our block when viewed.
+ */
+function ychenik_ad_block_view($delta = '') {
+  $block = array();
+  switch($delta) {
+  case 'ychenik_ad_form':
+  $block['subject'] = t('');     
+  $block['content'] = drupal_get_form('ychenik_ad_form');
+  break;
+  }
+  return $block;
+}
+     
+/**
+ * Define the form to be returned.
+ */
+function ychenik_ad_form($form, &$form_state) {
+  global $bb;   
+  global $user;
+  $type = 'business';
+  $result = db_select('node','n')
+          ->fields('n',array('title'))
+          ->fields('n',array('nid'))
+          ->orderBy('title', 'ASC') //ORDER BY ...
+          ->condition('n.uid',$user->uid,'=')
+          ->condition('n.type',$type,'=')
+          ->execute();
+  foreach($result as $item) {
+  $list[$item->nid] = $item->title;
+  }
+
+// list ($list) Title of Business with City that created the current User 
+//  $type = 'business';
+//  $query = db_select('node', 'n');
+//  $query->join('field_data_field_city', 't', 'n.nid = t.entity_id');
+//  $query->fields('n',array('title', 'nid')) 
+//          ->fields('t', array('field_city_value'))
+//          ->orderBy('title', 'ASC') 
+//          ->condition('n.uid',$user->uid,'=')
+//          ->condition('n.type',$type,'=');
+//  $result = $query->execute();
+//  foreach($result as $item) {
+//   $list[$item->nid] = $item->title. ' in ' . $item->field_city_value;
+//  }
+  $bb = 0;
+// list ($list_2) of purchases that created the current User
+  $query = db_select('uc_roles_expirations', 'ner');
+  $query->join('uc_roles_products', 'rp', 'ner.rid = rp.rid');
+  $query->join('node', 'n', 'rp.nid = n.nid');
+  $query->join('field_data_field_display_duration', 'dd', 'dd.entity_id = n.nid');
+  $query->fields('ner',array('rid', 'uid')) 
+        ->fields('rp', array('nid'))
+        ->fields('dd', array('field_display_duration_value'))  
+        ->fields('n', array('title')) 
+        ->condition('ner.uid',$user->uid,'=');
+  $result = $query->execute();
+  foreach($result as $item) {
+    $list_2[$item->nid] = $item->title;
+	  if (strpos($item->title, 'Billboard') !== false) {  
+// if last... was paided Billboard-01 or Billboard-02
+// show form elements for bbd
+    $bb = 1;
+		}
+  }
+	
+	
+// INSERT to DB new EXPIRATION date and role "12" for 'billboard'
+//    $rid = 12;
+//    $account = user_load($user->uid);
+//    $account->roles[$rid] = 'create-bbd';
+//		$uid = $account->uid;
+//    user_save($account);
+//		
+//    $expiredate = date ('U', strtotime("now")) + 60*60*24*30; //+1 month
+//    db_insert('uc_roles_expirations')
+//    ->fields (array (
+//      'uid'        => $user->uid,
+//      'rid'        => $rid,
+//      'expiration' => $expiredate,
+//    ))
+//    ->execute();
+	
+  $form['shopping_list'] = array(
+    '#type'        => 'select',
+    '#title'       => t("Select the paid ad product"),
+    '#description' => t("You should select the ad product for chosen 'business', if you paid more than one product."),
+    '#options'     => $list_2,
+  );	
+  if (!empty($list)) {  
+  $form['content_list'] = array(
+    '#type'        => 'select',
+    '#title'       => t("Select your 'Business'"),
+    '#description' => t("You should select the 'business' name, if you have more than one 'business' to ad it"),
+    '#options'     => $list,
+  );
+	}
+    else {
+      drupal_set_message(t("You paid an ad but don't have listed business, you can create your BUSINESS now"),"warning");
+      drupal_goto('node/add/business');
+    }
+	
+	
+	if ($bb == 1) { //hide if paid not 'billboard'
+	
+	  $form['file'] = array(
+      '#type'        => 'file',
+      '#title'       => t("Image"),
+//     '#required' => TRUE,
+//			'#size' => 2000,
+      '#description' => t("You should upload an extra Image file for 'billboard' with extensions: jpg, jpeg, png, gif"),
+    );
+
+    $form['choice'] = array(
+    '#type' => 'radios',
+    '#title' => t('Position'),
+    '#description' => t('Choice a position for your banner: L - left, C - center, R - right'),
+    '#default_value' => 'L',
+    '#options' => array(
+      'L' => t('L'),
+      'C' => t('C'),
+      'R' => t('R'),
+    )
+    );
+  }//if
+			 
+  $form['submit'] = array(
+    '#type'  => 'submit',
+    '#value' => t('Submit'),
+  );     
+  return $form;
+}  
+
+function ychenik_ad_form_validate($form, &$form_state) {
+  global $bb; //$bb is undefined w/o this
+	if ($bb == 1) { //hide if paid not 'billboard'
+    $file = file_save_upload('file', array(
+      'file_validate_is_image' => array(),
+      'file_validate_extensions' => array('png gif jpg jpeg'),
+//			'file_validate_size' => array(variable_get('btn_file_size', '5') * 1024),
+    ));
+    if ($file) {
+      if ($file = file_move($file, 'public://')) {
+        $form_state['values']['file'] = $file;
+      }
+      else {
+        form_set_error('file', t('Failed to write the uploaded file the site\'s file folder.'));
+      }
+    }
+    else {
+      form_set_error('file', t('No file was uploaded.'));
+    }
+  }
+}  
+     
+/**
+ * Define a submit funciton that drupal will
+ * automatically call when submit is pressed (and all validators pass)
+ */
+
+function ychenik_ad_form_submit($form, &$form_state) {
+  global $user;
+	
+  $pdnid = $form_state['values']['shopping_list'];
+  $pdnode = node_load($pdnid); 
+//	$tos_group = ($pdnid == 124 || $pdnid == 233) ? 1 : 0;
+	if (strpos($pdnode->title,'Top on search') !== false) {
+	  $tos_group = 1; //if choiced TOS
+  }
+	if (strpos($pdnode->title,'Billboard') !== false) {
+	  $tos_group = 0; //if choiced BBD
+  }
+
+//  BRANCH TOS 
+	if ($tos_group == 1) {
+// get from FORM nid of the business (e.g.'Fantasy Dance Studio')
+    $adnid = $form_state['values']['content_list']; 
+    $adnode = node_load($adnid);	  
+// set field PAID=1	to start advertising TOS
+    if ($adnode->field_paid['und'][0]['value'] == 0) {
+      $adnode->field_paid['und'][0]['value'] = 1;  
+      field_attach_update('node', $adnode);
+      drupal_set_message(t("Your Ad is running near the top of the search result!"));	
+    } 
+    else {
+      drupal_set_message(t("'$adnode->title' is still active, so we cannot ... "),"warning");
+      drupal_goto('user/'.$GLOBALS['user']->uid);
+    }
+  } 
+
+//  BRANCH BBD
+	elseif ($tos_group == 0) {
+    $adnid = $form_state['values']['content_list'];	
+    $adnode = node_load($adnid);	 
+    $file = $form_state['values']['file'];
+    unset($form_state['values']['file']);
+    $file->status = FILE_STATUS_PERMANENT;	
+    file_save($file); 
+// set field 'billboard paid'=1	to start advertising BBD
+    if ( !empty($adnode->field_billboard_paid['und'][0]['value']) || $adnode->field_billboard_paid['und'][0]['value'] != 1) {
+      $adnode->field_billboard_image['und'][0] = (array)$file;
+			$position = $form_state['values']['choice'];
+      $adnode->field_billboard_position['und'][0]['value'] = $position;			 		
+      $adnode->field_billboard_paid['und'][0]['value'] = 1;  //set field =1 to start advertising BBD
+			$cat = $adnode->field_billboard_position['und'][0]['value']; //L,C,R
+      field_attach_update('node', $adnode);
+      drupal_set_message(t("Your business '$adnode->title' is running in '$position' - banner"), 'status');	
+    }
+		elseif ($adnode->field_billboard_paid['und'][0]['value'] == 1) {
+      drupal_set_message(t("The previous banner is still active, so we cannot activate the new one at this point"),"warning");
+			drupal_goto('user/'.$GLOBALS['user']->uid);
+    }
+  }
+      
+/*		
+// get from FORM nid of the ad_billboard type
+		$bbdnid = $form_state['values']['billboard_list'];
+    $bbdnode = node_load($bbdnid);
+    if ($bbdnode->field_show['und'][0]['value'] == 0) {
+// set field SHOW=1	to start advertising BBD
+			$bbdnode->field_show['und'][0]['value'] = 1;  //activate show
+      $cat = $bbdnode->field_category['und'][0]['value']; //L,C,R
+			field_attach_update('node', $bbdnode);
+      drupal_set_message(t("Your page has been posted on the website's billboard"), 'status');	
+    }
+    else {
+      drupal_set_message(t("Select another 'Billboard' to ad! '$bbdnode->title' has been run already."),"warning");
+      drupal_goto('user/'.$GLOBALS['user']->uid);
+    }
+ }
+*/
+//  BOTH
+// to get nid of business you chose
+//  $pdnid = $form_state['values']['shopping_list'];  //nid of the product (e.g.'Top on search-01')
+//  $pdnode = node_load($pdnid);
+// get display duration hours
+
+
+ $dd_h = $pdnode->field_display_duration['und'][0]['value'];
+// get RID for this AD and unset active roles
+  $query = db_query( 'SELECT rp.rid FROM {uc_roles_products} rp WHERE rp.nid =:nid', array(':nid' =>$pdnid));
+  foreach($query as $item) {
+    $rid = $item->rid;  	
+// Unset active role 
+    $account = user_load($user->uid);    
+    if (isset($account->roles[$rid])) {
+      unset($account->roles[$rid]);
+      uc_roles_delete($account, $rid); 
+      $edit = array('roles' => $account->roles);
+      user_save($account, $edit);
+    }				
+  }
+//}
+
+// Create new node 'advertising' type			
+  $node = new StdClass();
+  $node->type = 'advertising';
+  $node->status = 1;
+  $node->title = $pdnode->title;
+  $node->language = 'und';
+  $node->uid = $account->uid;
+
+// Calculate values of the fields
+
+//  BRANCH TOS
+  if ($tos_group == 1) {
+    $node->field_advertised_product['und'][0]['value'] = $adnode->title;
+    $node->field_advertised_nid['und'][0]['value'] = $adnid;
+  }
+//  BRANCH BBD
+//  else {
+//    $node->field_advertised_product['und'][0]['value'] = $bbdnode->title;
+//    $node->field_advertised_nid['und'][0]['value'] = $bbdnid;      
+//    $node->field_ad_category['und'][0]['value'] = $cat; 
+//    $sl_cnt = slides_count($cat);
+//    $node->field_ad_slides_count['und'][0]['value'] = $sl_cnt;
+//  }	
+  else {
+    $node->field_advertised_product['und'][0]['value'] = $adnode->title;
+    $node->field_advertised_nid['und'][0]['value'] = $adnid;    
+    $node->field_ad_category['und'][0]['value'] = $cat; 
+    $sl_cnt = slides_count($cat);
+    $node->field_ad_slides_count['und'][0]['value'] = $sl_cnt;
+  }	
+
+//  BOTH   
+  $date = getdate();
+  $start = $date[0];
+  $node->field_ad_start['und'][0]['value'] = $start;
+  $node->field_ad_previous['und'][0]['value'] = $start;
+  $remain = $dd_h*60*60;				
+  $d_r = $remain/(60*60*24);
+  if ($remain >=0) {
+    $node->field_ad_status['und'][0]['value'] = 'Active';
+    $node->field_ad_remain['und'][0]['value'] = $d_r;
+  }
+  else {
+    $node->field_ad_status['und'][0]['value'] = 'Complete';
+    $node->field_ad_remain['und'][0]['value'] = '0';
+  }			
+  node_save($node);	
+			
+//redirect to front page to see result		
+  $form_state['redirect'] = array('search');	
+					  
+}
+ 
+
+
+
+/**
+ * Implements hook_cron().
+ */ 
+function ychenik_ad_cron(){ 
+  $result = db_query('SELECT nid FROM {node} WHERE type = :type', array(':type' => 'advertising',));
+  $queue = DrupalQueue::get('finish ad');
+  foreach ($result as $item) {
+    $queue->createItem($item);
+  }
+}
+/**
+ * Implements hook_cron_queue_info().
+ */ 
+function ychenik_ad_cron_queue_info() {
+  $queues['finish ad'] = array(
+    'worker callback' => 'timer_callback', //
+    'time' => 120,
+  );
+  return $queues;
+}
+/**
+ * Implements CALLBACK() function for CRON().
+ */ 
+function timer_callback($item) {
+  $node = node_load($item->nid);
+  if (strpos($node->title,'Top on search') !== false) { 
+    $group = 1;
+  }
+  if (strpos($node->title,'Billboard') !== false) { 
+    $group = 0;
+  }
+  if ($node->field_ad_status['und'][0]['value'] == 'Active') {
+    $date = getdate();
+    $remain_old = $node->field_ad_remain['und'][0]['value']*60*60*24;
+    $date_old = $node->field_ad_previous['und'][0]['value'];
+//Calculate remain time for Top on search    
+    if ($group == 1) {
+      $remain = $remain_old - ($date[0]-$date_old);
+    }
+//Calculate remain time for Billboard 
+    if ($group == 0) {
+      $sl_cnt_old = $node->field_ad_slides_count['und'][0]['value'];
+      $remain = $remain_old - ($date[0]-$date_old)/$sl_cnt_old;
+    }
+      $d_r = $remain/(60*60*24);
+//Update of fields			
+    if ($remain >=0) {
+      $node->field_ad_status['und'][0]['value'] = 'Active';
+      $node->field_ad_remain['und'][0]['value'] = $d_r;
+      $node->field_ad_previous['und'][0]['value'] = $date[0];
+      // Update extra fields for Billboard
+      if ($group == 0) {
+        $cat = $node->field_ad_category['und'][0]['value'];
+        $sl_cnt = slides_count($cat);
+        $node->field_ad_slides_count['und'][0]['value'] = $sl_cnt;        			
+      }		
+      field_attach_update('node', $node);
+    }else{
+//Close the process
+      $node->field_ad_status['und'][0]['value'] = 'Complete';
+      $node->field_ad_remain['und'][0]['value'] = '0';					
+      $adnid = $node->field_advertised_nid['und'][0]['value']; //
+      $adnode = node_load($adnid);	
+      if ($group == 1 && $adnode->field_paid['und'][0]['value'] == 1) {
+        $adnode->field_paid['und'][0]['value'] = 0;
+ //       drupal_set_message(t("Sorry! Your Ad 'Top on search' was expired!"),"warning");				
+      }
+      if ($group == 0 && $adnode->field_billboard_paid['und'][0]['value'] == 1) {
+        $adnode->field_billboard_paid['und'][0]['value'] = 0;
+//        drupal_set_message(t("Sorry! Your Ad 'Billboard' was expired!"),"warning");
+      }
+      field_attach_update('node', $adnode);
+      field_attach_update('node', $node);				
+    }
+  }
+}
+/** Function of count number slides (nodes) that have $show =1 for each $cat = L,C or R
+ *  
+ *
+ */ 
+	function slides_count($cat) {
+    $query = db_select('node', 'n');
+    $query->join('field_data_field_billboard_paid', 'sh', 'n.nid = sh.entity_id'); //join second table
+    $query->join('field_data_field_billboard_position', 'c', 'n.nid = c.entity_id'); //join third table
+    $query->condition('c.field_billboard_position_value',$cat,'=')
+          ->condition('n.type', $type='business')
+          ->condition('sh.field_billboard_paid_value',$show ='1')
+          ->addExpression('COUNT(nid)', 'node_count'); //counter nodes
+    $result = $query->execute();
+    while(
+    $record = $result->fetchAssoc()) {
+    return $record['node_count'];
+    }
+  }
+
+/**
+ * Implements hook_node_insert().
+ */ 
+function ychenik_ad_node_insert($node) {    
+
+  if ($node->type == 'event') {
+//    drupal_set_message(t("Your EVENT has been posted on the website's CALENDAR"), 'status');
+    global $user;
+    $account = user_load($user->uid);
+    if (isset($account->roles[7])) {
+      unset($account->roles[7]);
+      uc_roles_delete($account, '7');
+      $edit = array('roles' => $account->roles);
+      user_save($account, $edit);
+    }  
+// Create new node 'advertising'for 'event'		
+    $node = new StdClass();
+    $node->type = 'advertising';
+    $node->status = 1;
+    $node->title = 'Event in calendar';
+    $node->language = 'und';
+    $node->uid = $account->uid;
+    $date = getdate();
+    $start = $date[0];
+    $node->field_ad_start['und'][0]['value'] = $start;
+    $node->field_ad_status['und'][0]['value'] = 'Complete';
+    node_save($node);		
+  }  
+}
+/**
+ * Empliment hook_node_update()
+ */ 
+//function ychenik_ad_node_update($node) { 
+//// DELETE the ROLE 'subscriber' and 'expired time' for it
+//  if ($node->type == 'ad_billboard') {
+//    global $user;
+//    $account = user_load($user->uid);
+//    if (isset($account->roles[12])) {
+//      unset($account->roles[12]);
+//      uc_roles_delete($account, 12);
+//      $edit = array('roles' => $account->roles);
+//      user_save($account, $edit);
+//    }
+//  }
+//}

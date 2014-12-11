@@ -1,0 +1,8 @@
+core = "7.x"
+description = "An example module forms creation."
+name = "Ychenik Form"
+package = Custom
+files[] = ychenik_form.module
+
+
+;php = 5.3}

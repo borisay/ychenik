@@ -1,0 +1,52 @@
+<?php
+/**
+ * Implements hook_views_api()
+ */
+function ychenik_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
+ 
+/**
+ * Implements hook_views_data()
+ * Exposes our playcount table to views
+ */
+function ychenik_views_data() {
+  // Basic table information.
+  $data['my_video_playcount'] = array(
+    'table' => array(
+      'group' => t('File statistics'),
+      'join' => array(
+        'file_managed' => array(
+          'left_field' => 'fid',
+          'field' => 'file_fid',
+        ),
+      ),
+    )
+  );
+
+  // Our fields
+  $data['my_video_playcount']['playcount'] = array(
+    'title' => t('Playcount'),
+    'help' => t('The total number of times the video has been started.'),
+  );
+ 
+  // Adds our field in the "Fields" section of Views
+  $data['my_video_playcount']['playcount']['field'] = array(
+    'handler' => 'views_handler_field_numeric',
+    'click sortable' => TRUE,
+  );
+ 
+  // Adds our field in the "Filters" section of Views
+  $data['my_video_playcount']['playcount']['filter'] = array(
+    'handler' => 'views_handler_filter_numeric',
+  );
+ 
+  // Adds our field in the "Sort" section of Views
+  $data['my_video_playcount']['playcount']['sort'] = array(
+    'handler' => 'views_handler_sort',
+  );
+ 
+  return $data;
+}

@@ -30,7 +30,7 @@ h6 {
 }
 h1 {
   font-size: 1.357em;
-  color: #000;
+  color: #333;
 }
 h2 {
   font-size: 1.143em;
@@ -1665,7 +1665,7 @@ div.admin-panel .description {
 }
 /* ******************************extra code *********************************/
 #content h1, h2, h2 a {
-  color: #646464;
+  /*color: #646464;*/
 }
 .views-exposed-form { 
   position: relative;
@@ -1811,10 +1811,10 @@ div.admin-panel .description {
   clear: both;
 }
 h1#page-title {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #007ACC;
+  font-family: 'Viga', Arial, Helvetica, sans-serif;
+/*  color: #007ACC;
   position: relative;
-  z-index: 2;
+  z-index: 2;*/
 }
 .views-view-grid
 .views-label {
@@ -2063,16 +2063,16 @@ a.button {
 #block-blog-recent,
 #block-comment-recent,
 #block-ychenik-business-comments  {
-  float: right;
+  float: left;
   padding: 0 15px;
-  border-left: 2px solid #eee;
+  /*border-left: 2px solid #eee;*/
   width: 375px;
 }
 #block-ychenik-business-comments
 .content,
 #block-blog-recent
 .content {
-  border-bottom: 2px solid #eee;
+  /*border-bottom: 2px solid #eee;*/
 }
 #block-blog-recent
 .more-link,
@@ -2083,10 +2083,12 @@ a.button {
 
 #block-forum-new,
 #block-views-news-block-1 {
-  position: relative;
-  top: 10px;
+  float: right;
+  /*position: relative;*/
+  /*top: 10px;*/
+  padding: 0 15px;
   width: 375px;
-  border-bottom: 2px solid #eee;
+  /*border-bottom: 2px solid #eee;*/
 }
 .fb_link, .web_link {
   background-color: #E7F4FF;
@@ -2110,7 +2112,7 @@ a.button {
   font-weight: bold;     
 }
 .form-item-field-description-und-0-value {
-  z-index: -0;
+  z-index: 0;
   position: relative;
 }
 #block-block-21 {
@@ -2141,8 +2143,10 @@ a.button {
 .highlight {
   background-color: rgba(255, 191, 64, 0.19)!important;
 }
+/*.sidebar h2,*/
 #content h2 {
-  font-family: 'Squada One';
+  /*font-family: 'Squada One';*/
+  font-family: 'Viga';
 }
 .view .date-nav-wrapper .date-heading h3 {
   font-size: 1.4em;

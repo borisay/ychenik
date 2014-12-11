@@ -1,0 +1,102 @@
+<?php
+/**
+* Implementation of hook_form_alter().
+*
+*http://www.metaltoad.com/blog/how-make-range-selector-filter-views
+*http://pixelthis.gr/blog/how-make-range-selector-filter-views
+*
+*/
+function ychenik_form_alter(&$form, $form_state, $form_id) {
+//
+  // Load up a $view object like we would expect to work with
+//dpm($form); //This is to get form information
+
+if (isset($form['#parameters'][1]['view'])) {
+    $view = $form['#parameters'][1]['view'];
+  }
+if($form_id=='views_exposed_form'){ 
+if(
+
+$form_state['view']->name=='test'){//check if the view is the PAGE
+           ychenik_range_to_select('field_rating', array(
+          '1,2' => '1.1 to 2',
+          '2,3' => '2.1 to 3',
+          '3,4' => '3.1 to 4',
+          '4,5' => '4.1 to 5',
+        ), $form, $form_state); 
+		   
+/*		   ychenik_range_to_select('field_city_tid', array(
+          'Mountain View' => 'MV',
+          'Palo Alto' => 'PA',
+		), $form, $form_state);*/
+	}
+//	break;
+/*  }elseif(
+
+$form_state['view']->name=='test'){
+         
+
+ychenik_range_to_select('field_city', array(
+          'Mountain View,Mountain View' => 'MV',
+          'Palo Alto,Palo Alto' => 'PA',
+		  
+        ), $form, $form_state);
+				
+  }else{}*/
+}
+}
+
+/**
+* Turn a range field into a select dropdown. This assumes that the $options array
+* is going to be something like: array('5,9' => '5 to 9 lbs') where the index is
+* a comma delimited string of the min/max values. 
+* Pass in $optional = TRUE if you want there to be an <any> value at the top of
+* the select dropdown. Defaults to TRUE.
+*/
+function ychenik_range_to_select($field, $options, &$form, &$form_state, $optional = TRUE) {
+$form[$field]['#type'] = 'select';
+$form[$field]['#default_value'] = 'All';
+$form[$field]['#size'] = 'NULL';
+  if ($optional) {
+    $options = array_merge(array('All' => '<Any>'), $options);
+  }
+  $form[$field]['#options'] = $options;
+  unset($form[$field]['min']);
+  unset($form[$field]['max']);
+  $f = $form_state['input'][$field];
+  $f ? $form[$field]['#value'] = $f : true;
+  if(empty($form[$field]['#value'])){$form[$field]['#value']='All';}
+  $form[$field]['#element_validate'] = array('ychenik_range_validate');
+  
+  
+}
+/**
+* Turn values created by range_to_select back into ranges so that Views can process
+* the request. This assumes that if the value passed in is 'All' the min/max array
+* should be set to array('min' => '', 'max' => '')
+*/
+function ychenik_range_validate($element, &$form_state) {
+if ((
+
+$v = $element['#value'])) {
+    if ($v == 'All') {
+      $min = $max = '';
+    }else {
+    if(is_array($v)){$min=$max='';}else{
+      list($min, $max) = explode(',', $v);
+      }
+    }
+    $form_state['input'][$element['#name']] = array(
+      'min' => $min,
+      'max' => $max,
+    );
+    $form_state['values'][$element['#name']] = array(
+      'min' => $min,
+      'max' => $max,
+    );
+  }
+}
+
+
+
+?>

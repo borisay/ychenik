@@ -1,0 +1,9 @@
+name = Ychenik
+description = A module for start-up project.
+core = 7.x
+package = Custom
+files[] = ychenik.module
+
+
+;dependencies[] = views
+;php = 5.3}

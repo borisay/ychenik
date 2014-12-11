@@ -1,0 +1,48 @@
+<?php
+/**
+ * Implements hook_form_alter().
+ */
+function ychenik_search_form_alter(&$form, &$form_state, $form_id) {
+  static $css_ids, $form_ids, $loaded;
+
+	$css_ids = array(0 => 'views-exposed-form-search-page');
+  $form_ids = array(0 => 'views_exposed_form_search_page');
+//  $descriptions = 1;
+  if (in_array($form_id, $form_ids) || (isset($form['#id']) && in_array($form['#id'], $css_ids))) {
+    if (!isset($loaded)) {
+      _ychenik_search_include_js($css_ids);
+      $loaded = TRUE;
+    }
+  }
+
+	
+//	if ($form_id == 'views_exposed_form') {
+//	  $form['#validate'][] = 'add_form_validate';
+//	}
+}
+
+/**
+ * Additional handler for views_exposed_form form validation.
+ */
+		
+//function add_form_validate($form, &$form_state) {
+//  if ($form_state['values']['field_what_tid'] =='' && $form_state['values']['field_where_tid'] =='') {
+//    form_set_error('', t('You need to fill at least one field "Where?" or "What?" before you click SEARCH'));
+//  }
+//}
+
+/**
+ * Include JavaScript and CSS and attach behaviors to all selected forms.
+ */
+function _ychenik_search_include_js($css_ids) {
+  $path = drupal_get_path('module', 'ychenik_search');
+  drupal_add_js($path . '/ychenik_search.js');
+  drupal_add_css($path . '/ychenik_search.css');
+
+  $settings = array(
+    'ychenikSearch' => array(
+      'forms' => $css_ids,
+    ),
+  );
+  drupal_add_js($settings, 'setting');
+}

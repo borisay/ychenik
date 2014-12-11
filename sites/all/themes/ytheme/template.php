@@ -126,7 +126,15 @@ function ytheme_preprocess_block(&$variables) {
   // In the header region visually hide block titles.
   if ($variables['block']->region == 'header') {
     $variables['title_attributes_array']['class'][] = 'element-invisible';
-  }	
+  }
+  if (isset($variables['block'])) {
+    if ($variables['block']->module == 'blog') {
+      $variables['block']->subject = l(t('Blog'),  'blog');
+    }
+    if ($variables['block']->module == 'forum') {
+      $variables['block']->subject = l(t('Forums'),  'forum');
+    }
+  }  
 }
 
 /**

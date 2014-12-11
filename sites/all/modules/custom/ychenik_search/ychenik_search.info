@@ -1,0 +1,7 @@
+; $Id: ychenik_search.info,v 1.0 2014/01/07 
+name = Ychenik Search
+description = Overlays form fields with JavaScript.
+package = Custom
+core = 7.x
+
+

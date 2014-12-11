@@ -1,0 +1,274 @@
+<?php 
+/**
+* Implements hook_menu_alter.
+* to get "Hello USER"
+* to change the title of 'simple-fb-connect' TAB and reorder it
+*/
+function ychenik_menu_alter(&$items) {
+  $items['user']['title callback'] = 'ychenik_user_menu_title';
+  $items['user/simple-fb-connect']['title'] = t('Sign In with');
+  $items['user/password']['weight'] = 1;
+  $items['user/simple-fb-connect']['weight'] = 0;
+}
+/**
+* Callback to include "Hello" to user_menu.
+*/
+function ychenik_user_menu_title() {
+  global $user;
+  return user_is_logged_in() ? t('Hello, ' . $user->name .  '!') : t('User account');
+}
+
+/**
+* Implements hook_form_FORM_ID_alter()
+* Rename the "save" comment button
+* http://drupal.stackexchange.com/questions/15308/how-do-you-rename-the-save-comment-button
+*/
+function ychenik_form_comment_form_alter(&$form, &$form_state) {
+  $form['actions']['submit']['#value'] = t('Submit Comment');
+}
+
+/**
+* Implements hook_form_FORM_ID_alter()
+* 
+*/
+function ychenik_form_business_node_form_alter(&$form, &$form_state) {
+// Rename the "Title" to "Business Name" for "Create Business" form
+  $form['title']['#title'] = t('Business Name');
+// Access to fields... only user/1  
+  global $user;
+  if ($user->uid == 1) {
+    $form['field_paid']['#access'] = 1;
+    $form['field_rate']['#access'] = 1;
+    $form['field_review']['#access'] = 1;	
+    $form['field_billboard_position']['#access'] = 1;
+    $form['field_billboard_background']['#access'] = 1;
+    $form['field_billboard_paid']['#access'] = 1;
+    $form['field_billboard_image']['#access'] = 1;
+  }
+  else {
+    $form['field_paid']['#access'] = 0;
+    $form['field_rate']['#access'] = 0;
+    $form['field_review']['#access'] = 0;
+    $form['field_billboard_position']['#access'] = 0;	
+    $form['field_billboard_background']['#access'] = 0;
+    $form['field_billboard_paid']['#access'] = 0;	
+    $form['field_billboard_image']['#access'] = 0;
+  }
+  //$form['#validate'][] = 'ychenik_title_validate';
+}
+/*
+ * The function of getting NID for Title of node
+ */
+/*
+function get_nid_for_title($title, $type, &$nid_exists) {
+$row = db_select('node','n')
+          ->fields('n',array('nid'))
+          ->condition('n.title',$title,'=')
+          ->condition('n.type',$type,'=')
+          ->execute()
+          ->fetchField();
+$nid_exists = $row;
+}
+
+function ychenik_title_validate($form,&$form_state) {
+  $title = $form_state['values']['title'];
+  get_nid_for_title($form_state['values']['title'], 'business', $not);
+  $node_cur = $form['#node'];
+  if(!empty($not)) {
+    if(!empty($node_cur->nid)) {
+      $nid_cur = $node_cur->nid;
+      if($not !== $nid_cur) {
+        form_set_error('title', "Your Business title '$title' already exists. The business title should be unique. Please contact <a href='/contact'>Ychenik</a>.");
+      }
+    }else{
+      form_set_error('title', "Your Business title '$title' already exists. The business title should be unique. Please contact <a href='/contact'>Ychenik</a>.");
+    }
+  }
+}
+*/
+
+/**
+* Implements hook_node_insert()
+*/
+function ychenik_node_insert($node) { 
+//global $my_nid;
+//$my_nid = $node->nid;
+  if ($node->type == 'business') {
+    drupal_set_message(t("CONGRATULATIONS!"), 'status');
+    drupal_set_message(t("<a href='/catalog/all-best-your-business'>WOULD YOU LIKE TO GET THE BEST RESULTS?</a>"), 'status');
+  }
+}
+
+/**
+* Implements hook_node_update()
+* 
+*/
+function ychenik_node_update($node) {
+  if ($node->type == 'business') {
+    drupal_set_message(t("CONGRATULATIONS!"), 'status');
+    drupal_set_message(t("<a href='/catalog/all-best-your-business'>WOULD YOU LIKE TO GET THE BEST RESULTS?</a>"), 'status');
+//		drupal_get_messages('status');
+  }
+}
+
+/**
+* Implements hook_form_alter()
+* To redirect user to 'node/77'after submit "Business" node/form
+* 
+* node/77 is page with marketing suggestions
+
+function ychenik_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'business_node_form') {
+    $form['actions']['submit']['#submit'][] = 'ychenik_redirect_callback';
+	}
+}
+function ychenik_redirect_callback($form, &$form_state) {
+//  if (arg(2) == "edit") {
+    $form_state['redirect'] = array('node/77'); 
+//  }
+}
+
+function ychenik_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'views_exposed_form'
+  $form['submit']['#value'] = t('What?');
+}
+*/
+/**
+* Implements hook_form_alter()
+*/
+function ychenik_form_alter(&$form, &$form_state, $form_id) {
+ //dsm($form_id); //get id
+ //dsm($form); //get all ARRAY
+  if($form_id == 'user_profile_form') {
+    $form['#submit'][] = 'ychenik_profile_form_submit';
+  }
+  if($form_id == 'user_pass_reset') {
+    $form['actions']['submit']['#value'] = t('Reset password');
+  }
+  if($form_id == 'business_node_form') {
+    $form['field_where']['#attributes']['title'] = t('You can fill out this field like:
+      San Francisco
+      or like:
+      94121
+      or like some comma separated words:
+      94121, Peninsula, San Francisco, 95050');
+    $form['field_description']['#attributes']['title'] = t('This is a field to describe your business');
+  } 
+
+  if($form_id == 'views_exposed_form') {
+    $form['field_where_tid']['#attributes']['title'] = t('Add location(s) by specifying city, area, district or ZIP code where your service is available/provided. Use comma as delimiter. This field supports auto-completion mode. Once you start typing a keyword, see a hint and choose from the drop-down list.');
+    $form['field_what_tid']['#attributes']['title'] = t('Add keyword(s) like Tennis, Math or Music. Use comma as delimiter. This field supports auto-completion mode. Once you start typing a keyword, see a hint and choose from the drop-down list.');
+  }
+   
+}
+function ychenik_profile_form_submit($form, &$form_state) {
+  $form_state['redirect'] = array('search');
+}
+/**
+* Implements hook_init()
+* redirect if user not login and want to create "business" content
+*/
+function ychenik_init(){
+  global $user;
+  if ($user->uid == 0  && $_GET['q'] == 'node/add/business' ) {
+    drupal_set_message(t("You should SIGN IN before 'List New Business'"), 'warning');
+    drupal_goto('user/login', array('query' => array('destination' => 'node/add/business')));
+  }
+  //if ($user->uid == 0  && $_GET['q'] == 'catalog/114' || $user->uid == 0  && $_GET['q'] == 'catalog') {
+  if ($user->uid == 0  && $_GET['q'] == 'catalog/114') {
+
+    drupal_set_message(t("You should SIGN IN to see this page"), 'warning');
+    drupal_goto('user/login', array('query' => array('destination' => 'catalog/all-best-your-business')));
+  }
+}
+
+/*
+ * Implements hook_block_info
+ * recent comments for business type content
+ */
+function ychenik_block_info() {
+  $blocks = array();
+  $blocks['business_comments'] = array (
+    'info' => t ('A listing of recently added businesses comments.'),   
+  );
+  return $blocks;
+}
+
+/*
+ * Implements hook_block_view()
+ */
+function ychenik_block_view($block_name ='') {
+  if ($block_name == 'business_comments') {
+    $block = array(
+       'subject' => t('Recent grades'),
+//       'content' => theme('business_comment_block'),
+       'content' => theme_business_comment_block(),
+    );
+    return $block;
+  }
+}
+
+/*
+ * Implements theming function
+ */
+function theme_business_comment_block() {
+  $items = array();
+//  $number = variable_get('comment_block_count', 10);
+  $number = 3;
+  foreach (business_comment_get_recent($number) as $comment) {
+//    $items[] = l($comment->subject, 'comment/' . $comment->cid, array('fragment' => 'comment-' . $comment->cid)) . '&nbsp;<span>' . t('@time ago', array('@time' => format_interval(REQUEST_TIME - $comment->changed))) . '</span>';
+    $items[] = l($comment->subject, 'comment/' . $comment->cid, array('fragment' => 'comment-' . $comment->cid)) ;
+    
+  }
+  if ($items) {
+    return theme('item_list', array('items' => $items));
+  }
+  else {
+    return t('No comments available.');
+  }
+}
+
+/*
+ * Implements function of getting 10 recent comments for Business content type
+ */
+//function business_comment_get_recent($number = 10) {
+function business_comment_get_recent($number = 3) {
+  $query = db_select('comment', 'c');
+  $query->innerJoin('node', 'n', 'n.nid = c.nid');
+  $query->addTag('node_access');
+  $comments = $query->fields('c')->condition('c.status', COMMENT_PUBLISHED)->condition('n.status', NODE_PUBLISHED)->condition('n.type', 'business')->orderBy('c.created', 'DESC')
+  ->orderBy('c.cid', 'DESC')->range(0, $number)->execute()->fetchAll();
+  return $comments ? $comments : array();
+}
+
+/**
+ * Implements hook_menu().
+ */
+function ychenik_menu() {
+  $items['node/%node/widget'] = array(
+    'title' => 'Widget',
+    'page callback' => 'ychenik_widget',
+    'page arguments' => array(1),
+    'access arguments' => array(1),
+    'access callback' => 'ychenik_access_check',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+  );
+  return $items;
+}
+
+function ychenik_widget($node) {
+  drupal_set_message('Widget will provide a link from another site on your Ychenik business page. COPY this html code and PASTE it into another website.');
+  return '<pre>&lt;html&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot;&gt;&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;display:inline-block&quot;&gt;&lt;a href=&quot;http://localhost:8888/ychenik/node/'.$node->nid.'&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;http://ychenik.org/sites/default/files/images/widget.png&quot; alt=&quot;Ychenik widget&quot; style=&quot;border:none;&quot; rel=&quot;nofollow&quot;&gt;&lt;/a&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</pre>'.'<img id="widget"src="http://ychenik.org/sites/default/files/images/widget.png" alt="Ychenik widget" style="border:none; float:right;" rel="nofollow">';
+}
+
+function ychenik_access_check($node) {
+  global $user;
+  if($node->type == "business") {
+    if(($node->uid == $user->uid) || ($user->uid == 1) || (in_array('editor', $user->roles))){
+      return TRUE;
+    } 
+  }else{
+    return FALSE;
+  }
+}
