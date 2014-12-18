@@ -1681,7 +1681,7 @@ div.admin-panel .description {
 .views-exposed-widgets .form-item input {
   color: #bf5d07;
   font-style: italic;
-  width: 310px;
+  width: 264px;
 }
 .views-exposed-form .views-exposed-widget .form-submit {
   margin-top: 2px;
@@ -1891,16 +1891,16 @@ h1#page-title {
 }
 
 #block-block-17 {
-  position: relative;
-  top: 67px;
-  left:	4px;
-  width: 1072px;
-  height: 103px;
-  background-color: #000000;
-  opacity: 0.2;
-  filter:alpha(opacity=20); /* For IE8 and earlier */
-  color: #ffffff;
-  z-index: 2;
+  /*position: relative;*/
+  /*left:	0px;*/
+  /*width: 300px;*/
+  /*height: 600px;*/
+  /*background-color: #000000;*/
+  /*opacity: 0.2;*/
+  /*filter:alpha(opacity=20);  For IE8 and earlier */
+  /*color: #ffffff;*/
+  /*z-index: 2;*/
+  border: 1px solid #999999;
 
 }
 .region-featured
@@ -1943,11 +1943,17 @@ table .mini-day-on a {
   z-index: 2; /*for views edit*/
 }
 #block-views-calendar-block-1 {
-  width: 92.5%;
+  width: 30%;
   float: right;
   margin-top: 0px;
   position: relative;
   z-index: 3;
+  background: #f6f6f2;
+}
+#block-views-calendar-block-2 {
+  width: 67%;
+  float: left;
+  background: #f6f6f2;
 }
 .date-nav {
   padding-bottom: 0;
@@ -1988,7 +1994,7 @@ select.form-select {
 input.form-submit,
 a.button {
   background: url("/ychenik/sites/default/files/search.png");
-  padding: 4px 21px;
+  padding: 4px 17px;
   -khtml-border-radius: 1px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 1px;
@@ -2064,9 +2070,9 @@ a.button {
 #block-comment-recent,
 #block-ychenik-business-comments  {
   float: left;
-  padding: 0 15px;
+  /*padding: 0 15px;*/
   /*border-left: 2px solid #eee;*/
-  width: 375px;
+  width: 321px;
 }
 #block-ychenik-business-comments
 .content,
@@ -2086,8 +2092,8 @@ a.button {
   float: right;
   /*position: relative;*/
   /*top: 10px;*/
-  padding: 0 15px;
-  width: 375px;
+  /*padding: 0 15px;*/
+  width: 321px;
   /*border-bottom: 2px solid #eee;*/
 }
 .fb_link, .web_link {

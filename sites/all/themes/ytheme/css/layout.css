@@ -18,6 +18,7 @@ body,
 #footer-columns,
 #footer {
   width: 1080px;
+  /*width: 1200px;*/
   margin-left: auto;
   margin-right: auto;
 }
@@ -55,7 +56,7 @@ body,
   position: relative;
 }
 .one-sidebar #content {
-  width: 840px;
+  width: 733px;
 }
 .two-sidebars #content {
   width: 600px;
@@ -66,7 +67,7 @@ body,
 }
 #sidebar-first,
 #sidebar-second {
-  width: 240px;
+  /*width: 240px;*/
 }
 #main-wrapper {
   min-height: 300px;
@@ -95,6 +96,6 @@ body,
   width: 220px;
 }
 #footer {
-  width: 940px;
+  width: 1080px;
   min-width: 920px;
 }
